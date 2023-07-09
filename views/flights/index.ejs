@@ -1,0 +1,12 @@
+<%- include('layout') %>
+<h1>All Flights</h1>
+<ul>
+  <% flights.forEach(flight => { %>
+    <li>
+      <strong>Airline:</strong> <%= flight.airline %><br>
+      <strong>Airport:</strong> <%= flight.airport %><br>
+      <strong>Flight No.:</strong> <%= flight.flightNo %><br>
+      <strong>Departs:</strong> <%= flight.departs.toDateString() %>
+    </li>
+  <% }) %>
+</ul>
