@@ -9,8 +9,11 @@
 </head>
 <body>
   <nav>
-    <a href="/flights/new" <%- title === 'Add Flight' ? 'class="active"' : '' %>>ADD FLIGHT</a>
-    <a href="/flights" <%- title === 'All Flights' ? 'class="active"' : '' %>>ALL FLIGHTS</a>
+    <button onclick="location.href='/'" <%- title === 'Welcome to Mongoose Airport' ? 'class="active"' : '' %>>Home</button>
+    <button onclick="location.href='/flights/new'" <%- title === 'Add Flight' ? 'class="active"' : '' %>>Add Flight</button>
+    <button onclick="location.href='/flights'" <%- title === 'All Flights' ? 'class="active"' : '' %>>All Flights</button>
   </nav>
   <main>
     <h1><%= title %></h1>
+
+
