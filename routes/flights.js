@@ -1,32 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const Flight = require('../models/flight');
+const flightsCtrl = require('../controllers/flights');
 
 // Route for viewing all flights (index)
-router.get('/flights', async (req, res) => {
-  try {
-    const flights = await Flight.find();
-    res.render('flights/index', { flights });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.get('/', flightsCtrl.index);
 
 // Route for creating a new flight (new form)
-router.get('/flights/new', (req, res) => {
-  res.render('flights/new');
-});
+router.get('/new', flightsCtrl.new);
 
 // Route for handling the flight creation (create)
-router.post('/flights', async (req, res) => {
-  try {
-    await Flight.create(req.body);
-    res.redirect('/flights');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+router.post('/', flightsCtrl.create);
+
+// Route for viewing a single flight (show)
+router.get('/:id', flightsCtrl.show);
 
 module.exports = router;

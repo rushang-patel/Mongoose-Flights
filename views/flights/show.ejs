@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+<h1>Flight Details</h1>
+
+<table id="flight-details">
+  <tr>
+    <th>Airline:</th>
+    <td><%= flight.airline %></td>
+  </tr>
+  <tr>
+    <th>Airport:</th>
+    <td><%= flight.airport %></td>
+  </tr>
+  <tr>
+    <th>Flight No.:</th>
+    <td><%= flight.flightNo %></td>
+  </tr>
+  <tr>
+    <th>Departs:</th>
+    <td><%= formatDepartureDate(flight.departs) %></td>
+  </tr>
+</table>
+
+<a href="/flights">Back to All Flights</a>
+
+<%- include('../partials/footer') %>

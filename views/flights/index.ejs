@@ -1,12 +1,29 @@
-<%- include('layout') %>
-<h1>All Flights</h1>
-<ul>
-  <% flights.forEach(flight => { %>
-    <li>
-      <strong>Airline:</strong> <%= flight.airline %><br>
-      <strong>Airport:</strong> <%= flight.airport %><br>
-      <strong>Flight No.:</strong> <%= flight.flightNo %><br>
-      <strong>Departs:</strong> <%= flight.departs.toDateString() %>
-    </li>
-  <% }) %>
-</ul>
+<%- include('../partials/header') %>
+
+<table id="list">
+  <thead>
+    <tr>
+      <th>Airline</th>
+      <th>Airport</th>
+      <th>Flight No</th>
+      <th>Departs</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% flights.forEach(function(flight) { %>
+      <tr>
+        <td><%= flight.airline %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.flightNo %></td>
+        <td><%= flight.departs.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' }) %></td>
+        <td><a href="/flights/<%= flight._id %>">DETAILS</a></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>
+
+
+
