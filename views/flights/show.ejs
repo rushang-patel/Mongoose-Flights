@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 
-<h1>Flight Details</h1>
+<h1><%= title %></h1>
 
 <table id="flight-details">
   <tr>
@@ -12,15 +12,14 @@
     <td><%= flight.airport %></td>
   </tr>
   <tr>
-    <th>Flight No.:</th>
+    <th>Flight No:</th>
     <td><%= flight.flightNo %></td>
   </tr>
   <tr>
     <th>Departs:</th>
-    <td><%= formatDepartureDate(flight.departs) %></td>
+    <td><%= flight.departs.toDateString() %></td>
   </tr>
 </table>
 
-<a href="/flights">Back to All Flights</a>
-
 <%- include('../partials/footer') %>
+

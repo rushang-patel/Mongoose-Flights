@@ -26,18 +26,30 @@ function newFlight(req, res) {
 
 async function create(req, res) {
   try {
-    await Flight.create(req.body);
-    res.redirect('/flights');
+    const { airline, airport, flightNo, departs } = req.body;
+    const flight = new Flight({ airline, airport, flightNo, departs });
+    await flight.save();
+    res.redirect(`/flights/${flight._id}`);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
 }
 
+async function remove(req, res) {
+    try {
+      await Flight.findByIdAndRemove(req.params.id);
+      res.redirect('/flights');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  }
+
 module.exports = {
   index,
   show,
   new: newFlight,
   create,
+  remove,
 };
-
