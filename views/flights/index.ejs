@@ -1,7 +1,5 @@
 <%- include('../partials/header') %>
 
-<h1>All Flights</h1>
-
 <table>
   <tr>
     <th>Airline</th>
@@ -23,8 +21,15 @@
         </form>
       </td>
     </tr>
+    <% flight.destinations.forEach(function(destination) { %>
+      <tr>
+        <td colspan="5">
+          Airport: <%= destination.airport %><br>
+          Arrival: <%= destination.arrival.toDateString() %>
+        </td>
+      </tr>
+    <% }); %>
   <% }); %>
 </table>
 
 <%- include('../partials/footer') %>
-

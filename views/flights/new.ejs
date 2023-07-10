@@ -1,7 +1,5 @@
 <%- include('../partials/header') %>
 
-<h1>Add Flight</h1>
-
 <form id="new-flight-form" action="/flights" method="POST">
   <div class="form-group">
     <label for="airline">Airline:</label>
@@ -32,10 +30,17 @@
     <label for="departs">Departure Date:</label>
     <input type="date" id="departs" name="departs" required>
   </div>
+  
+  <div class="form-group">
+    <label for="destAirport">Destination Airport:</label>
+    <select id="destAirport" name="destAirport">
+      <% for (let i = 0; i < airports.length; i++) { %>
+        <option value="<%= airports[i] %>"><%= airports[i] %></option>
+      <% } %>
+    </select>
+  </div>
 
   <button type="submit">Create Flight</button>
 </form>
 
 <%- include('../partials/footer') %>
-
-
