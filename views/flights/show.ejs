@@ -1,37 +1,32 @@
 <%- include('../partials/header') %>
 
-<table id="flight-details">
-  <tr>
-    <th>Airline:</th>
-    <td><%= flight.airline %></td>
-  </tr>
-  <tr>
-    <th>Airport:</th>
-    <td><%= flight.airport %></td>
-  </tr>
-  <tr>
-    <th>Flight No:</th>
-    <td><%= flight.flightNo %></td>
-  </tr>
-  <tr>
-    <th>Departs:</th>
-    <td><%= flight.departs.toDateString() %></td>
-  </tr>
-  <tr>
-    <th>Destinations:</th>
-    <td>
-      <ul>
-        <% flight.destinations.forEach(function(destination) { %>
-          <li>
-            Airport: <%= destination.airport %><br>
-            Arrival: <%= destination.arrival.toDateString() %>
-          </li>
-        <% }); %>
-      </ul>
-    </td>
-  </tr>
-</table>
-
+<div class="flight-details-container">
+  <div class="flight-detail">
+    <span class="detail-label">Airline:</span>
+    <span class="detail-value"><%= flight.airline %></span>
+  </div>
+  <div class="flight-detail">
+    <span class="detail-label">Airport:</span>
+    <span class="detail-value"><%= flight.airport %></span>
+  </div>
+  <div class="flight-detail">
+    <span class="detail-label">Flight No:</span>
+    <span class="detail-value"><%= flight.flightNo %></span>
+  </div>
+  <div class="flight-detail">
+    <span class="detail-label">Departs:</span>
+    <span class="detail-value"><%= flight.departs.toLocaleString() %></span>
+  </div>
+  <% flight.destinations.forEach(function(destination) { %>
+    <div class="flight-detail">
+      <span class="detail-label">Destination Airport:</span>
+      <span class="detail-value"><%= destination.destAirport %></span>
+    </div>
+    <div class="flight-detail">
+      <span class="detail-label">Arrival:</span>
+      <span class="detail-value"><%= destination.arrival.toLocaleString() %></span>
+    </div>
+  <% }); %>
+</div>
 
 <%- include('../partials/footer') %>
-

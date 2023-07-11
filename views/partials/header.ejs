@@ -5,13 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title><%= title %></title>
+  <!-- Set the page title based on the 'title' variable -->
+  <title><%= title %></title> 
 </head>
 <body>
   <nav>
-    <button onclick="location.href='/'" <%- title === 'Welcome to Mongoose Airport' ? 'class="active"' : '' %>>Home</button>
-    <button onclick="location.href='/flights/new'" <%- title === 'Add Flight' ? 'class="active"' : '' %>>Add Flight</button>
-    <button onclick="location.href='/flights'" <%- title === 'All Flights' ? 'class="active"' : '' %>>All Flights</button>
+    <!-- Set the 'Home' button as active if the title matches 'Welcome to Mongoose Airport' -->
+    <button onclick="location.href='/'" <%- title === 'Welcome to Mongoose Airport' ? 'class="active"' : '' %>>Home</button> 
+
+    <!-- Set the 'Add Flight' button as active if the title matches 'Add Flight' -->
+    <button onclick="location.href='/flights/new'" <%- title === 'Add Flight' ? 'class="active"' : '' %>>Add Flight</button> 
+
+    <!-- Set the 'All Flights' button as active if the title matches 'All Flights' -->
+    <button onclick="location.href='/flights'" <%- title === 'All Flights' ? 'class="active"' : '' %>>All Flights</button> 
   </nav>
   <main>
     <h1><%= title %></h1>

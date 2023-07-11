@@ -6,6 +6,8 @@
     <th>Airport</th>
     <th>Flight Number</th>
     <th>Departs</th>
+    <th>Destination Airport</th>
+    <th>Arrival</th>
     <th>Actions</th>
   </tr>
   <% flights.forEach(function(flight) { %>
@@ -13,23 +15,28 @@
       <td><%= flight.airline %></td>
       <td><%= flight.airport %></td>
       <td><%= flight.flightNo %></td>
-      <td><%= flight.departs.toLocaleDateString() %></td>
+      <td><%= flight.departs.toLocaleString() %></td>
+      <% if (flight.destinations.length > 0) { %>
+        <td><%= flight.destinations[0].destAirport %></td>
+        <td><%= flight.destinations[0].arrival.toLocaleString() %></td>
+      <% } else { %>
+        <td>N/A</td>
+        <td>N/A</td>
+      <% } %>
       <td>
-        <a href="/flights/<%= flight._id %>">DETAILS</a>
+        <button class="action-button" onclick="location.href='/flights/<%= flight._id %>'">DETAILS</button>
         <form action="/flights/<%= flight._id %>?_method=DELETE" method="POST" style="display: inline;">
-          <button type="submit">DELETE</button>
+          <button class="action-button" type="submit">DELETE</button>
+        </form>
+        
         </form>
       </td>
     </tr>
-    <% flight.destinations.forEach(function(destination) { %>
-      <tr>
-        <td colspan="5">
-          Airport: <%= destination.airport %><br>
-          Arrival: <%= destination.arrival.toDateString() %>
-        </td>
-      </tr>
-    <% }); %>
   <% }); %>
 </table>
 
 <%- include('../partials/footer') %>
+
+
+
+

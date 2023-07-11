@@ -1,45 +1,61 @@
 <%- include('../partials/header') %>
 
 <form id="new-flight-form" action="/flights" method="POST">
+  <!-- Airline -->
   <div class="form-group">
     <label for="airline">Airline:</label>
     <select id="airline" name="airline">
       <option value="American">American</option>
       <option value="Southwest">Southwest</option>
       <option value="United">United</option>
+      <option value="Spirit">Spirit</option>
+      <option value="Frontier">Frontier</option>
     </select>
   </div>
 
+  <!-- Airport -->
   <div class="form-group">
     <label for="airport">Airport:</label>
     <select id="airport" name="airport">
-      <option value="AUS">AUS</option>
-      <option value="DFW">DFW</option>
-      <option value="DEN">DEN</option>
-      <option value="LAX">LAX</option>
-      <option value="SAN">SAN</option>
+      <option value="AUS">Austin (AUS)</option>
+      <option value="DFW">Dallas (DFW)</option>
+      <option value="DEN">Denver (DEN)</option>
+      <option value="LAX">Los Angeles (LAX)</option>
+      <option value="SAN">San Diego (SAN)</option>
     </select>
   </div>
 
+  <!-- Flight Number -->
   <div class="form-group">
     <label for="flightNo">Flight Number:</label>
     <input type="number" id="flightNo" name="flightNo" min="10" max="9999" required>
   </div>
 
+  <!-- Departure Date and Time -->
   <div class="form-group">
-    <label for="departs">Departure Date:</label>
-    <input type="date" id="departs" name="departs" required>
+    <label for="departs">Departure Date and Time:</label>
+    <input type="datetime-local" id="departs" name="departs" required>
   </div>
-  
+
+  <!-- Destination Airport -->
   <div class="form-group">
     <label for="destAirport">Destination Airport:</label>
     <select id="destAirport" name="destAirport">
-      <% for (let i = 0; i < airports.length; i++) { %>
-        <option value="<%= airports[i] %>"><%= airports[i] %></option>
-      <% } %>
+      <option value="LON">London (LON)</option>
+      <option value="TOR">Toronto (TOR)</option>
+      <option value="PHX">Phoenix (PHX)</option>
+      <option value="MIA">Miami (MIA)</option>
+      <option value="HON">Honolulu (HON)</option>
     </select>
   </div>
 
+  <!-- Arrival Date and Time -->
+  <div class="form-group">
+    <label for="arrival">Arrival Date and Time:</label>
+    <input type="datetime-local" id="arrival" name="arrival" required>
+  </div>
+
+  <!-- Submit Button -->
   <button type="submit">Create Flight</button>
 </form>
 

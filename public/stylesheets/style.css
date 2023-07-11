@@ -1,8 +1,187 @@
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f7ff;
+  color: #333;
 }
 
-a {
-  color: #00B7FF;
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2vmin;
 }
+
+header {
+  background-color: #007bff;
+  padding: 2vmin 0;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 0;
+  font-size: 3vmin;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: #3498db;
+  padding: 1vmin;
+  margin-bottom: 2vmin;
+  text-align: center;
+}
+
+nav button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 1vmin 2vmin;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2vmin;
+  border-radius: 1vmin;
+  cursor: pointer;
+  margin-right: 1vmin;
+}
+
+nav button.active {
+  background-color: #45a049;
+}
+
+/* Flight List */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2vmin;
+}
+
+th {
+  background-color: #f2f2f2;
+  padding: 1vmin;
+  font-weight: bold;
+}
+
+td {
+  padding: 1vmin;
+  border-bottom: 0.1vmin solid #ccc;
+}
+
+/* Flight Details */
+
+.flight-details-container {
+  border: 0.1vmin solid #ccc;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  margin-bottom: 4vmin;
+  background-color: #f2f7ff;
+}
+
+.flight-detail {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2vmin;
+}
+
+.detail-label {
+  width: 15vmin;
+  font-weight: bold;
+}
+
+.detail-value {
+  flex: 1;
+}
+
+footer {
+  background-color: #007bff;
+  padding: 2vmin 0;
+  color: #fff;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+.action-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 1vmin 2vmin;
+  border: none;
+  border-radius: 1vmin;
+  font-size: 2vmin;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #45a049;
+}
+
+.action-button:active {
+  background-color: #398038;
+}
+
+/* Add Flight Page */
+
+.add-flight-container {
+  border: 0.1vmin solid #ccc;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  margin-bottom: 4vmin;
+  background-color: #f2f7ff;
+}
+
+.add-flight-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2vmin;
+}
+
+.add-flight-form label {
+  font-weight: bold;
+}
+
+.add-flight-form input[type="text"],
+.add-flight-form input[type="number"],
+.add-flight-form select {
+  width: 100%;
+  padding: 1vmin;
+  font-size: 1.6vmin;
+  border: 0.1vmin solid #ccc;
+  border-radius: 0.5vmin;
+}
+
+.add-flight-form button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 0.8vmin 1.6vmin;
+  border: none;
+  border-radius: 1vmin;
+  font-size: 1.6vmin;
+  cursor: pointer;
+}
+
+.add-flight-form button:hover {
+  background-color: #45a049;
+}
+
+.add-flight-form button:active {
+  background-color: #398038;
+}
+
+#new-flight-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.1vmin solid black;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  background-color: white;
+}
+
