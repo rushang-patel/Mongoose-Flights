@@ -29,4 +29,17 @@
   <% }); %>
 </div>
 
+<h2>Tickets</h2>
+<% if (tickets.length > 0) { %>
+  <ul>
+    <% tickets.forEach(function(ticket) { %>
+      <li><%= ticket.seat %> - $<%= ticket.price %></li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No tickets found for this flight.</p>
+<% } %>
+
+<a href="/flights/<%= flight._id %>/tickets/new" class="action-button">New Ticket</a>
+
 <%- include('../partials/footer') %>

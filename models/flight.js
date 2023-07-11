@@ -16,6 +16,24 @@ const destinationSchema = new mongoose.Schema({
   }
 });
 
+const ticketSchema = new mongoose.Schema({
+  seat: {
+    type: String,
+    match: /[A-F][1-9]\d?/,
+    required: true
+  },
+  price: {
+    type: Number,
+    min: 0,
+    required: true
+  },
+  flight: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Flight',
+    required: true
+  }
+});
+
 const flightSchema = new mongoose.Schema({
   airline: {
     type: String,
@@ -35,7 +53,7 @@ const flightSchema = new mongoose.Schema({
   },
   departs: {
     type: Date,
-    default: function() {
+    default: function () {
       const oneYearFromNow = new Date();
       oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
       return oneYearFromNow;
@@ -46,5 +64,10 @@ const flightSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Flight', flightSchema);
+const Flight = mongoose.model('Flight', flightSchema);
+const Ticket = mongoose.model('Ticket', ticketSchema);
 
+module.exports = {
+  Flight,
+  Ticket
+};

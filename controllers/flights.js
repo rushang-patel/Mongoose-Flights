@@ -1,86 +1,111 @@
 const Flight = require('../models/flight');
+const Ticket = require('../models/ticket');
 
-// Fetch all flights
-async function index(req, res) {
-  try {
-    const flights = await Flight.find();
-    res.render('flights/index', { title: 'All Flights', flights });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+// Controller actions for flights
 
-// Show a specific flight
-async function show(req, res) {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    res.render('flights/show', { title: 'Flight Detail', flight });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+const index = (req, res) => {
+  Flight.find({}, (err, flights) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.render('flights/index', { flights });
+    }
+  });
+};
 
-// Render the form for adding a new flight
-function newFlight(req, res) {
-  const airports = ['AUS', 'DFW', 'DEN', 'LAX', 'SAN'];
-  res.render('flights/new', { title: 'Add Flight', airports });
-}
+const newFlightForm = (req, res) => {
+  res.render('flights/new');
+};
 
-// Create a new flight
-async function create(req, res) {
-  try {
-    await Flight.create(req.body);
-    res.redirect('/flights');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+const showFlight = (req, res) => {
+  const flightId = req.params.id;
 
-// Add a destination to a flight
-async function createDestination(req, res) {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    const { destAirport, arrival, departure } = req.body;
-    flight.destinations.push({ destAirport, arrival, departure });
-    await flight.save();
-    res.redirect(`/flights/${flight._id}`);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+  Flight.findById(flightId)
+    .populate('tickets')
+    .exec((err, flight) => {
+      if (err || !flight) {
+        console.log(err);
+        res.status(404).send('Flight not found');
+      } else {
+        res.render('flights/show', { flight });
+      }
+    });
+};
 
-// Render the destinations for a flight
-async function showDestinations(req, res) {
-  try {
-    const flight = await Flight.findById(req.params.id);
-    res.render('flights/destinations', { title: 'Flight Destinations', destinations: flight.destinations });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+const createFlight = (req, res) => {
+  const { airline, airport, flightNo, departs } = req.body;
 
-// Delete a flight
-async function deleteFlight(req, res) {
-  try {
-    await Flight.findByIdAndDelete(req.params.id);
-    res.redirect('/flights');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-}
+  const newFlight = new Flight({
+    airline,
+    airport,
+    flightNo,
+    departs,
+  });
+
+  newFlight.save((err, flight) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.redirect('/flights');
+    }
+  });
+};
+
+const createTicket = (req, res) => {
+  const flightId = req.params.id;
+  const { seat, price } = req.body;
+
+  Flight.findById(flightId, (err, flight) => {
+    if (err || !flight) {
+      console.log(err);
+      res.status(404).send('Flight not found');
+    } else {
+      const newTicket = new Ticket({
+        seat,
+        price,
+        flight: flight._id,
+      });
+
+      newTicket.save((err, ticket) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send('Internal Server Error');
+        } else {
+          flight.tickets.push(ticket);
+          flight.save((err) => {
+            if (err) {
+              console.log(err);
+              res.status(500).send('Internal Server Error');
+            } else {
+              res.redirect(`/flights/${flightId}`);
+            }
+          });
+        }
+      });
+    }
+  });
+};
+
+const deleteFlight = (req, res) => {
+  const flightId = req.params.id;
+
+  Flight.findByIdAndDelete(flightId, (err, flight) => {
+    if (err || !flight) {
+      console.log(err);
+      res.status(404).send('Flight not found');
+    } else {
+      res.redirect('/flights');
+    }
+  });
+};
 
 module.exports = {
   index,
-  show,
-  new: newFlight,
-  create,
-  createDestination,
-  showDestinations,
-  delete: deleteFlight
+  newFlightForm,
+  showFlight,
+  createFlight,
+  createTicket,
+  deleteFlight,
 };
